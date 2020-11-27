@@ -1,0 +1,17 @@
+{
+  "name": "lg-tools",
+  "version": "1.0.0",
+  "description": "常用工具函数",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "工具"
+  ],
+  "author": "Li-HONGYAO",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.1.2"
+  }
+}
