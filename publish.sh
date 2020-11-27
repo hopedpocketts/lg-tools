@@ -5,6 +5,7 @@ npm config get registry
 npm config set registry=http://registry.npmjs.org
 # 登陆输入自己的npm账号和密码，还有邮箱
 echo '登录'
+
 npm login
 echo "发布中..."
 npm publish
