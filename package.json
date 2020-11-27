@@ -1,6 +1,6 @@
 {
   "name": "lg-tools",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "常用工具函数",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -12,9 +12,10 @@
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint",
     "preversion": "npm run lint"
-
   },
-  "files": ["lib/**/*"], 
+  "files": [
+    "lib/**/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LiHongyao/lg-tools.git"
