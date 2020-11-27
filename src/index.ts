@@ -65,14 +65,14 @@ class Tools {
       return n[1] ? n : '0' + n;
     }
 
-    var date = new Date(timeStamp);
-    var year = formatNumber(date.getFullYear());
-    var month = formatNumber(date.getMonth() + 1);
-    var day = formatNumber(date.getDate());
+    let date = new Date(timeStamp);
+    let year = formatNumber(date.getFullYear());
+    let month = formatNumber(date.getMonth() + 1);
+    let day = formatNumber(date.getDate());
 
-    var hour = formatNumber(date.getHours());
-    var minute = formatNumber(date.getMinutes());
-    var second = formatNumber(date.getSeconds());
+    let hour = formatNumber(date.getHours());
+    let minute = formatNumber(date.getMinutes());
+    let second = formatNumber(date.getSeconds());
 
     if (format) {
       return format
@@ -83,7 +83,7 @@ class Tools {
         .replace('mm', minute)
         .replace('ss', second);
     }
-    var res = '';
+    let res = '';
     res += year + '-' + month + '-' + day + ' ';
     res += hour + ':' + minute + ':' + second;
     return res;
@@ -269,7 +269,7 @@ class Tools {
     type?: 'default' | 'uppercase' | 'lowercase' | 'digital',
   ) {
     type = type || 'default';
-    var bStr = '';
+    let bStr = '';
     switch (type) {
       case 'digital':
         bStr += '0123456789';
@@ -285,9 +285,9 @@ class Tools {
         bStr += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         bStr += 'abcdefghijklmnopqrstuvwxyz';
     }
-    var rStr = '';
-    for (var i = 0; i < length; ++i) {
-      var index = Math.floor(Math.random() * bStr.length);
+    let rStr = '';
+    for (let i = 0; i < length; ++i) {
+      let index = Math.floor(Math.random() * bStr.length);
       rStr += bStr.slice(index, index + 1);
     }
     return rStr;
@@ -299,7 +299,7 @@ class Tools {
    */
   public static randomDecimals(min: number, max: number) {
     // 异常处理
-    if (min == undefined || max == undefined || isNaN(min) || isNaN(max)) {
+    if (min === undefined || max === undefined || isNaN(min) || isNaN(max)) {
       return -1;
     } else {
       return Math.random() * (max - min) + min;
@@ -311,7 +311,7 @@ class Tools {
    * @param max
    */
   public static randomInteger(min: number, max: number) {
-    if (min == undefined || max == undefined || isNaN(min) || isNaN(max)) {
+    if (min === undefined || max === undefined || isNaN(min) || isNaN(max)) {
       return -1;
     } else {
       return Math.floor(Math.random() * (max - min + 1)) + min;
