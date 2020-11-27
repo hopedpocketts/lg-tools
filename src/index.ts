@@ -1,4 +1,3 @@
-
 /**
  * 全局声明
  */
@@ -105,10 +104,7 @@ class Tools {
    * @param phone
    * @param format space
    */
-  public static phoneFormatter(
-    phone: string,
-    format: 'space' | 'encryption' = 'encryption',
-  ) {
+  public static phoneFormatter(phone: string, format: 'space' | 'encryption' = 'encryption') {
     if (phone.length !== 11) {
       return '';
     } else if (format === 'space') {
@@ -201,11 +197,7 @@ class Tools {
         const seconds = formatNumber(Math.floor((timeStamp / 1000) % 60));
         let res: string | string[];
         if (format) {
-          res = format
-            .replace(/dd/gi, day)
-            .replace(/hh/gi, hours)
-            .replace(/mm/gi, minutes)
-            .replace(/ss/gi, seconds);
+          res = format.replace(/dd/gi, day).replace(/hh/gi, hours).replace(/mm/gi, minutes).replace(/ss/gi, seconds);
         } else {
           res = [day, hours, minutes, seconds];
         }
@@ -227,12 +219,8 @@ class Tools {
    * @param target
    */
   public static toRawType(target: any) {
-    return Object.prototype.toString
-      .call(target)
-      .slice(8, -1)
-      .toLowerCase();
+    return Object.prototype.toString.call(target).slice(8, -1).toLowerCase();
   }
-
 
   /**
    * 百度统计
@@ -242,10 +230,7 @@ class Tools {
     if (window._hmt) {
       switch (options.type) {
         case 'pv':
-          window._hmt.push([
-            '_trackPageview',
-            options.pageURL || location.pathname,
-          ]);
+          window._hmt.push(['_trackPageview', options.pageURL || location.pathname]);
           break;
         case 'es':
           window._hmt.push([
@@ -264,10 +249,7 @@ class Tools {
    * @param length
    * @param type
    */
-  public static randomCharacters(
-    length: number,
-    type?: 'default' | 'uppercase' | 'lowercase' | 'digital',
-  ) {
+  public static randomCharacters(length: number, type?: 'default' | 'uppercase' | 'lowercase' | 'digital') {
     type = type || 'default';
     let bStr = '';
     switch (type) {
