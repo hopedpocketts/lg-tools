@@ -37,20 +37,20 @@ class Tools {
    * @param name
    */
   public static query<T>(name?: string): T {
-    let search = window.location.search;
+    const search = window.location.search;
     if (search) {
-      let obj: Record<string, string> = {};
+      const obj: Record<string, string> = {};
       search
         .slice(1)
         .split('&')
         .forEach((item: string) => {
-          let arr = item.split('=');
+          const arr = item.split('=');
           obj[arr[0]] = decodeURIComponent(arr[1]);
         });
-      let res: unknown = name ? (obj[name] ? obj[name] : '') : obj;
+      const res: unknown = name ? (obj[name] ? obj[name] : '') : obj;
       return res as T;
     } else {
-      let res: unknown = name ? '' : {};
+      const res: unknown = name ? '' : {};
       return res as T;
     }
   }
@@ -65,14 +65,14 @@ class Tools {
       return n[1] ? n : '0' + n;
     }
 
-    let date = new Date(timeStamp);
-    let year = formatNumber(date.getFullYear());
-    let month = formatNumber(date.getMonth() + 1);
-    let day = formatNumber(date.getDate());
+    const date = new Date(timeStamp);
+    const year = formatNumber(date.getFullYear());
+    const month = formatNumber(date.getMonth() + 1);
+    const day = formatNumber(date.getDate());
 
-    let hour = formatNumber(date.getHours());
-    let minute = formatNumber(date.getMinutes());
-    let second = formatNumber(date.getSeconds());
+    const hour = formatNumber(date.getHours());
+    const minute = formatNumber(date.getMinutes());
+    const second = formatNumber(date.getSeconds());
 
     if (format) {
       return format
@@ -94,8 +94,8 @@ class Tools {
    * @param id 键
    */
   public static del<T>(arr: T[], key: keyof T, value: any): T[] {
-    let tmp = [...arr];
-    let index = tmp.findIndex((item: T) => item[key] === value);
+    const tmp = [...arr];
+    const index = tmp.findIndex((item: T) => item[key] === value);
     tmp.splice(index, 1);
     return tmp;
   }
@@ -128,11 +128,11 @@ class Tools {
     if (isNaN(Number(value))) {
       return '0';
     } else {
-      let foo = `${value}`;
+      const foo = `${value}`;
       if (/^[0-9]+$/.test(foo)) {
         return foo;
       } else {
-        let [prefix, suffix] = foo.split('.');
+        const [prefix, suffix] = foo.split('.');
         if (suffix.length === 1) {
           return `${prefix}.${suffix}0`;
         } else if (suffix.length > 2) {
@@ -155,14 +155,14 @@ class Tools {
    */
   public static clipboard(value: string) {
     return new Promise((resolve, reject) => {
-      let input = document.createElement('input');
+      const input = document.createElement('input');
       input.setAttribute('style', 'display: block; width: 1px; height: 1px;');
       input.setAttribute('readonly', 'readonly');
       input.setAttribute('value', value);
       document.body.appendChild(input);
       input.setSelectionRange(0, Infinity);
       input.select();
-      let result = document.execCommand('copy');
+      const result = document.execCommand('copy');
       document.body.removeChild(input);
       if (result) {
         resolve(null);
@@ -195,10 +195,10 @@ class Tools {
     } else {
       const tick = () => {
         timeStamp -= 1000;
-        let day = formatNumber(Math.floor(timeStamp / 1000 / 60 / 60 / 24));
-        let hours = formatNumber(Math.floor((timeStamp / 1000 / 60 / 60) % 24));
-        let minutes = formatNumber(Math.floor((timeStamp / 1000 / 60) % 60));
-        let seconds = formatNumber(Math.floor((timeStamp / 1000) % 60));
+        const day = formatNumber(Math.floor(timeStamp / 1000 / 60 / 60 / 24));
+        const hours = formatNumber(Math.floor((timeStamp / 1000 / 60 / 60) % 24));
+        const minutes = formatNumber(Math.floor((timeStamp / 1000 / 60) % 60));
+        const seconds = formatNumber(Math.floor((timeStamp / 1000) % 60));
         let res: string | string[];
         if (format) {
           res = format
@@ -217,7 +217,7 @@ class Tools {
         }
       };
       tick();
-      let timer = setInterval(tick, 1000);
+      const timer = setInterval(tick, 1000);
       return timer;
     }
   }
@@ -287,7 +287,7 @@ class Tools {
     }
     let rStr = '';
     for (let i = 0; i < length; ++i) {
-      let index = Math.floor(Math.random() * bStr.length);
+      const index = Math.floor(Math.random() * bStr.length);
       rStr += bStr.slice(index, index + 1);
     }
     return rStr;
