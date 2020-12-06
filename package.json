@@ -1,6 +1,6 @@
 {
   "name": "lg-tools",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "常用工具函数",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -14,7 +14,6 @@
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
-    
   },
   "files": [
     "lib/**/*"

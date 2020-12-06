@@ -89,9 +89,9 @@ class Tools {
   }
   /**
    * 删除数组中的指定元素
-   * @param arr 
-   * @param key 
-   * @param value 
+   * @param arr
+   * @param key
+   * @param value
    */
   public static del<T>(arr: T[], key: keyof T, value: any): T[] {
     const tmp = [...arr];
@@ -105,10 +105,7 @@ class Tools {
    * @param phone
    * @param format space
    */
-  public static phoneFormatter(
-    phone: string,
-    format: 'space' | 'encryption' = 'encryption',
-  ) {
+  public static phoneFormatter(phone: string, format: 'space' | 'encryption' = 'encryption') {
     if (phone.length !== 11) {
       return '';
     } else if (format === 'space') {
@@ -210,10 +207,7 @@ class Tools {
    * @param target
    */
   public static toRawType(target: any) {
-    return Object.prototype.toString
-      .call(target)
-      .slice(8, -1)
-      .toLowerCase();
+    return Object.prototype.toString.call(target).slice(8, -1).toLowerCase();
   }
 
   /**
@@ -224,10 +218,7 @@ class Tools {
     if (window._hmt) {
       switch (options.type) {
         case 'pv':
-          window._hmt.push([
-            '_trackPageview',
-            options.pageURL || location.pathname,
-          ]);
+          window._hmt.push(['_trackPageview', options.pageURL || location.pathname]);
           break;
         case 'es':
           window._hmt.push([
@@ -246,10 +237,7 @@ class Tools {
    * @param length
    * @param type
    */
-  public static randomCharacters(
-    length: number,
-    type?: 'default' | 'uppercase' | 'lowercase' | 'digital',
-  ) {
+  public static randomCharacters(length: number, type?: 'default' | 'uppercase' | 'lowercase' | 'digital') {
     type = type || 'default';
     let bStr = '';
     switch (type) {
