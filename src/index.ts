@@ -89,8 +89,9 @@ class Tools {
   }
   /**
    * 删除数组中的指定元素
-   * @param arr 数据源
-   * @param id 键
+   * @param arr 
+   * @param key 
+   * @param value 
    */
   public static del<T>(arr: T[], key: keyof T, value: any): T[] {
     const tmp = [...arr];
@@ -104,7 +105,10 @@ class Tools {
    * @param phone
    * @param format space
    */
-  public static phoneFormatter(phone: string, format: 'space' | 'encryption' = 'encryption') {
+  public static phoneFormatter(
+    phone: string,
+    format: 'space' | 'encryption' = 'encryption',
+  ) {
     if (phone.length !== 11) {
       return '';
     } else if (format === 'space') {
@@ -113,32 +117,7 @@ class Tools {
       return phone.replace(/(\d{3})(\d{4})(\d{4})/, `$1****$3`);
     }
   }
-  /**
-   * 人民币格式处理
-   * - 非数字：返回0
-   * - 整数：直接返回
-   * - 小数：保留小数点后两位，超出两位则截取
-   * @param value
-   */
-  public static RMBFormatter(value: string | number) {
-    if (isNaN(Number(value))) {
-      return '0';
-    } else {
-      const foo = `${value}`;
-      if (/^[0-9]+$/.test(foo)) {
-        return foo;
-      } else {
-        const [prefix, suffix] = foo.split('.');
-        if (suffix.length === 1) {
-          return `${prefix}.${suffix}0`;
-        } else if (suffix.length > 2) {
-          return `${prefix}.${suffix.slice(0, 2)}`;
-        } else {
-          return foo;
-        }
-      }
-    }
-  }
+
   /**
    * px转vw
    * @param pixel
@@ -172,34 +151,46 @@ class Tools {
    * 时间倒计时（返回时分秒）
    * @param timeStamp 时间戳
    * @param format    返回格式 dd hh:mm:ss，不传则返回元组类型[天,时,分,秒]
+   * @param type      倒计时格式 default/秒制；ms/毫秒制
    * @param pending   倒计时持续状态
    * @param complete  倒计时结束
    */
   public static timeDown(params: {
     timeStamp: number;
     format?: string;
+    type?: 'default' | 'ms';
     pending: (time: string | string[]) => void;
     complete: () => void;
   }) {
+    // 处理时间格式
     function formatNumber(n: number | string) {
       n = n.toString();
       return n[1] ? n : '0' + n;
     }
-    let { timeStamp, format, pending, complete } = params;
+    // 解构参数
+    let { timeStamp, format, type = 'default', pending, complete } = params;
+    const interval = type === 'default' ? 1000 : 100;
     if (timeStamp <= 0) {
       complete();
     } else {
       const tick = () => {
-        timeStamp -= 1000;
+        timeStamp -= interval;
         const day = formatNumber(Math.floor(timeStamp / 1000 / 60 / 60 / 24));
         const hours = formatNumber(Math.floor((timeStamp / 1000 / 60 / 60) % 24));
         const minutes = formatNumber(Math.floor((timeStamp / 1000 / 60) % 60));
         const seconds = formatNumber(Math.floor((timeStamp / 1000) % 60));
+        const millisecond = formatNumber(Math.floor((timeStamp % 1000) / 100));
         let res: string | string[];
+        // 判断是否格式返回
         if (format) {
-          res = format.replace(/dd/gi, day).replace(/hh/gi, hours).replace(/mm/gi, minutes).replace(/ss/gi, seconds);
+          res = format
+            .replace(/dd/gi, day)
+            .replace(/hh/gi, hours)
+            .replace(/mm/gi, minutes)
+            .replace(/ss/gi, seconds)
+            .replace(/ms/gi, millisecond);
         } else {
-          res = [day, hours, minutes, seconds];
+          res = type === 'default' ? [day, hours, minutes, seconds] : [day, hours, minutes, seconds, millisecond];
         }
         if (timeStamp <= 0) {
           clearInterval(timer);
@@ -209,7 +200,7 @@ class Tools {
         }
       };
       tick();
-      const timer = setInterval(tick, 1000);
+      const timer = setInterval(tick, interval);
       return timer;
     }
   }
@@ -219,7 +210,10 @@ class Tools {
    * @param target
    */
   public static toRawType(target: any) {
-    return Object.prototype.toString.call(target).slice(8, -1).toLowerCase();
+    return Object.prototype.toString
+      .call(target)
+      .slice(8, -1)
+      .toLowerCase();
   }
 
   /**
@@ -230,7 +224,10 @@ class Tools {
     if (window._hmt) {
       switch (options.type) {
         case 'pv':
-          window._hmt.push(['_trackPageview', options.pageURL || location.pathname]);
+          window._hmt.push([
+            '_trackPageview',
+            options.pageURL || location.pathname,
+          ]);
           break;
         case 'es':
           window._hmt.push([
@@ -249,7 +246,10 @@ class Tools {
    * @param length
    * @param type
    */
-  public static randomCharacters(length: number, type?: 'default' | 'uppercase' | 'lowercase' | 'digital') {
+  public static randomCharacters(
+    length: number,
+    type?: 'default' | 'uppercase' | 'lowercase' | 'digital',
+  ) {
     type = type || 'default';
     let bStr = '';
     switch (type) {
