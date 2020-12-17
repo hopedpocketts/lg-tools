@@ -291,9 +291,9 @@ class Tools {
    * 全屏
    */
   public static fullScreen() {
-    var el: any = document.documentElement;
-    var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullscreen;
-    if (typeof rfs != 'undefined' && rfs) {
+    const el: any = document.documentElement;
+    const rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+    if (typeof rfs !== 'undefined' && rfs) {
       rfs.call(el);
     }
     return;
@@ -302,9 +302,9 @@ class Tools {
    * 退出全屏
    */
   public static exitScreen() {
-    var el: any = document;
-    var cfs = el.exitFullscreen || el.mozCancelFullScreen || el.webkitCancelFullScreen || el.msExitFullscreen;
-    if (typeof cfs != 'undefined' && cfs) {
+    const el: any = document;
+    const cfs = el.exitFullscreen || el.mozCancelFullScreen || el.webkitCancelFullScreen || el.msExitFullscreen;
+    if (typeof cfs !== 'undefined' && cfs) {
       cfs.call(el);
     }
   }
