@@ -302,10 +302,12 @@ class Tools {
    * 退出全屏
    */
   public static exitFullscreen() {
-    const el: any = document;
-    const cfs = el.exitFullscreen || el.mozCancelFullScreen || el.webkitCancelFullScreen || el.msExitFullscreen;
-    if (typeof cfs !== 'undefined' && cfs) {
-      cfs.call(el);
+    if (document.fullscreenElement) {
+      const el: any = document;
+      const cfs = el.exitFullscreen || el.mozCancelFullScreen || el.webkitCancelFullScreen || el.msExitFullscreen;
+      if (typeof cfs !== 'undefined' && cfs) {
+        cfs.call(el);
+      }
     }
   }
 }
