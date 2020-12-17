@@ -287,5 +287,26 @@ class Tools {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
   }
+  /**
+   * 全屏
+   */
+  public static fullScreen() {
+    var el: any = document.documentElement;
+    var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+    if (typeof rfs != 'undefined' && rfs) {
+      rfs.call(el);
+    }
+    return;
+  }
+  /**
+   * 退出全屏
+   */
+  public static exitScreen() {
+    var el: any = document;
+    var cfs = el.exitFullscreen || el.mozCancelFullScreen || el.webkitCancelFullScreen || el.msExitFullscreen;
+    if (typeof cfs != 'undefined' && cfs) {
+      cfs.call(el);
+    }
+  }
 }
 export default Tools;
