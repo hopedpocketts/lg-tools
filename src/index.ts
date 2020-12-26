@@ -56,17 +56,18 @@ class Tools {
   /**
    * 将对象转换为query参数
    * eg. {name: 'muzili', age: 30} ===> ?name=muzili&age=30
-   * @param obj
+   * @param obj 
+   * @param hasPrefix 是否需要添加 `?` 前缀，默认true
    */
-  public static convertToQueryWith(obj: Record<string, string | number | boolean>) {
+  public static convertToQueryWith(obj: Record<string, string | number | boolean>, hasPrefix = true) {
     if (!obj || Tools.toRawType(obj) !== 'object') return '';
-    let res = '';
+    let res = hasPrefix ? '?' : '';
     Object.keys(obj).forEach((key: string) => {
       const v = obj[key];
       res += `${key}=${v ? encodeURIComponent(v) : ''}&`;
     });
     if (res) {
-      return `?${res.slice(0, res.length - 1)}`;
+      return res.slice(0, res.length - 1);
     }
     return res;
   }
