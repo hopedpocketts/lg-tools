@@ -54,6 +54,23 @@ class Tools {
     }
   }
   /**
+   * 将对象转换为query参数 
+   * eg. {name: 'muzili', age: 30} ===> ?name=muzili&age=30
+   * @param obj 
+   */
+  public static convertToQueryWith(obj : Record<string, string | number | boolean>) {
+    if(!obj || Tools.toRawType(obj) !== 'object') return '';
+    let res = '';
+    Object.keys(obj).forEach((key: string) => {
+      const v = obj[key];
+      res += `${key}=${v ? v : ''}&`
+    });
+    if(res) {
+      return `?${res.slice(0, res.length - 1)}`;
+    }
+    return res;
+  }
+  /**
    * 处理日期格式
    * @param timeStamp  时间错
    * @param format 格式
