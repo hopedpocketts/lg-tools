@@ -63,7 +63,7 @@ class Tools {
     let res = '';
     Object.keys(obj).forEach((key: string) => {
       const v = obj[key];
-      res += `${key}=${v ? v : ''}&`;
+      res += `${key}=${v ? encodeURIComponent(v) : ''}&`;
     });
     if (res) {
       return `?${res.slice(0, res.length - 1)}`;
