@@ -64,7 +64,7 @@ class Tools {
     let res = hasPrefix ? '?' : '';
     Object.keys(obj).forEach((key: string) => {
       const v = obj[key];
-      res += `${key}=${v ? encodeURIComponent(v) : ''}&`;
+      res += `${key}=${v !== undefined ? encodeURIComponent(v) : ''}&`;
     });
     if (res) {
       return res.slice(0, res.length - 1);
