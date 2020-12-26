@@ -56,7 +56,7 @@ class Tools {
   /**
    * 将对象转换为query参数
    * eg. {name: 'muzili', age: 30} ===> ?name=muzili&age=30
-   * @param obj 
+   * @param obj
    * @param hasPrefix 是否需要添加 `?` 前缀，默认true
    */
   public static convertToQueryWith(obj: Record<string, string | number | boolean>, hasPrefix = true) {
