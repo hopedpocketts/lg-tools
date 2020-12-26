@@ -54,18 +54,18 @@ class Tools {
     }
   }
   /**
-   * 将对象转换为query参数 
+   * 将对象转换为query参数
    * eg. {name: 'muzili', age: 30} ===> ?name=muzili&age=30
-   * @param obj 
+   * @param obj
    */
-  public static convertToQueryWith(obj : Record<string, string | number | boolean>) {
-    if(!obj || Tools.toRawType(obj) !== 'object') return '';
+  public static convertToQueryWith(obj: Record<string, string | number | boolean>) {
+    if (!obj || Tools.toRawType(obj) !== 'object') return '';
     let res = '';
     Object.keys(obj).forEach((key: string) => {
       const v = obj[key];
-      res += `${key}=${v ? v : ''}&`
+      res += `${key}=${v ? v : ''}&`;
     });
-    if(res) {
+    if (res) {
       return `?${res.slice(0, res.length - 1)}`;
     }
     return res;
