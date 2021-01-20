@@ -328,5 +328,28 @@ class Tools {
       }
     }
   }
+
+  /**
+   * Blob流转Excel
+   * @param data 流
+   * @param fileName 导出文件名
+   */
+  public static exportExcel(data: Blob, fileName: string) {
+    return new Promise((resolve, reject) => {
+      if (data.type === 'application/vnd.ms-excel') {
+        const blob = new Blob([data], { type: 'application/xlsx' });
+        const objectURL = URL.createObjectURL(blob);
+        let a: HTMLAnchorElement | null = document.createElement('a');
+        a.download = fileName + '.xlsx';
+        a.href = objectURL;
+        a.click();
+        URL.revokeObjectURL(objectURL);
+        a = null;
+        resolve(1);
+      } else {
+        reject(0);
+      }
+    });
+  }
 }
 export default Tools;
