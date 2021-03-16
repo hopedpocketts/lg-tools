@@ -351,5 +351,56 @@ class Tools {
       }
     });
   }
+
+  /**
+   * 获取年份集合
+   * @param start 开始年/默认值：1970
+   * @param end 结束年/默认值：当前年
+   * @returns
+   */
+  public static getYears(start: number = 1970, end: number = new Date().getFullYear()) {
+    const years: number[] = [];
+    for (let i = start; i <= end; i++) {
+      years.push(i);
+    }
+    return years;
+  }
+  /**
+   * 获取月份集合：[1-12]
+   * @returns
+   */
+  public static getMonths() {
+    const months: number[] = [];
+    for (let i = 1; i <= 12; i++) {
+      months.push(i);
+    }
+    return months;
+  }
+  /**
+   * 获取某月的天数集合
+   * @param options 可选项/如果赋值，则表示获取精确天数，默认为31天即[1-31]
+   * @returns
+   */
+  public static getDays(options?: { year: number; month: number }) {
+    const days: number[] = [];
+    let max = 31;
+    if (options) {
+      const { year, month } = options;
+      if ([4, 6, 9, 11].indexOf(month) !== -1) {
+        max = 30;
+      } else if (month === 2) {
+        // 计算是否闰年
+        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+          max = 29;
+        } else {
+          max = 28;
+        }
+      }
+    }
+    for (let i = 1; i <= max; i++) {
+      days.push(i);
+    }
+    return days;
+  }
 }
 export default Tools;
