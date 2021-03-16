@@ -390,7 +390,7 @@ class Tools {
         max = 30;
       } else if (month === 2) {
         // 计算是否闰年
-        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+        if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
           max = 29;
         } else {
           max = 28;
