@@ -1,6 +1,6 @@
 {
   "name": "lg-tools",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "常用工具函数",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
