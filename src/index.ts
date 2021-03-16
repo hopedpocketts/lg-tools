@@ -359,9 +359,9 @@ class Tools {
    * @returns
    */
   public static getYears(start: number = 1970, end: number = new Date().getFullYear()) {
-    const years: number[] = [];
+    const years: string[] = [];
     for (let i = start; i <= end; i++) {
-      years.push(i);
+      years.push(`${i.toString()}年`);
     }
     return years;
   }
@@ -370,9 +370,9 @@ class Tools {
    * @returns
    */
   public static getMonths() {
-    const months: number[] = [];
+    const months: string[] = [];
     for (let i = 1; i <= 12; i++) {
-      months.push(i);
+      months.push((i < 10 ? `0${i}` : i.toString()) + '月');
     }
     return months;
   }
@@ -382,7 +382,7 @@ class Tools {
    * @returns
    */
   public static getDays(options?: { year: number; month: number }) {
-    const days: number[] = [];
+    const days: string[] = [];
     let max = 31;
     if (options) {
       const { year, month } = options;
@@ -398,7 +398,7 @@ class Tools {
       }
     }
     for (let i = 1; i <= max; i++) {
-      days.push(i);
+      days.push((i < 10 ? `0${i}` : i.toString()) + '日');
     }
     return days;
   }
