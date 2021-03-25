@@ -402,5 +402,30 @@ class Tools {
     }
     return days;
   }
+  /**
+   * 批量下载文件
+   * @param urls 文件地址
+   * @returns
+   */
+  public static downloadFiles(urls: string[]) {
+    if (!urls || (urls && urls.length === 0)) return;
+    // create iframe element func.
+    const createIFrame = (url: string, triggerDelay: number, removeDelay: number) => {
+      setTimeout(function () {
+        const i = document.createElement('iframe');
+        i.style.display = 'none';
+        i.setAttribute('src', url);
+        document.body.appendChild(i);
+        setTimeout(function () {
+          i.remove();
+        }, removeDelay);
+      }, triggerDelay);
+    };
+    let triggerDelay = 100;
+    let removeDelay = 1000;
+    urls.forEach((url, index) => {
+      createIFrame(url, index * triggerDelay, removeDelay);
+    });
+  }
 }
 export default Tools;
