@@ -411,20 +411,18 @@ class Tools {
     if (!urls || (urls && urls.length === 0)) return;
     // create iframe element func.
     const createIFrame = (url: string, triggerDelay: number, removeDelay: number) => {
-      setTimeout(function () {
+      setTimeout(() => {
         const i = document.createElement('iframe');
         i.style.display = 'none';
         i.setAttribute('src', url);
         document.body.appendChild(i);
-        setTimeout(function () {
+        setTimeout(() => {
           i.remove();
         }, removeDelay);
       }, triggerDelay);
     };
-    let triggerDelay = 100;
-    let removeDelay = 1000;
     urls.forEach((url, index) => {
-      createIFrame(url, index * triggerDelay, removeDelay);
+      createIFrame(url, index * 100, 1000);
     });
   }
 }
