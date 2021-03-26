@@ -167,6 +167,7 @@ class Tools {
    * @param timeStamp 时间戳
    * @param format    返回格式 dd hh:mm:ss，不传则返回元组类型[天,时,分,秒]
    * @param type      倒计时格式 default/秒制；ms/毫秒制
+   * @param showDay   是否显示天 true-超过24小时天数+1；false-超过24小时累计小时值，默认为true
    * @param pending   倒计时持续状态
    * @param complete  倒计时结束
    */
@@ -174,6 +175,7 @@ class Tools {
     timeStamp: number;
     format?: string;
     type?: 'default' | 'ms';
+    showDay?: boolean;
     pending: (time: string | string[]) => void;
     complete: () => void;
   }) {
@@ -183,15 +185,17 @@ class Tools {
       return n[1] ? n : '0' + n;
     }
     // 解构参数
-    let { timeStamp, format, type = 'default', pending, complete } = params;
+    let { timeStamp, format, type = 'default', showDay = true, pending, complete } = params;
     const interval = type === 'default' ? 1000 : 100;
     if (timeStamp <= 0) {
       complete();
     } else {
       const tick = () => {
         timeStamp -= interval;
-        const day = formatNumber(Math.floor(timeStamp / 1000 / 60 / 60 / 24));
-        const hours = formatNumber(Math.floor((timeStamp / 1000 / 60 / 60) % 24));
+        const day = showDay ? formatNumber(Math.floor(timeStamp / 1000 / 60 / 60 / 24)) : '';
+        const hours = showDay
+          ? formatNumber(Math.floor((timeStamp / 1000 / 60 / 60) % 24))
+          : formatNumber(Math.floor(timeStamp / 1000 / 60 / 60));
         const minutes = formatNumber(Math.floor((timeStamp / 1000 / 60) % 60));
         const seconds = formatNumber(Math.floor((timeStamp / 1000) % 60));
         const millisecond = formatNumber(Math.floor((timeStamp % 1000) / 100));
