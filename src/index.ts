@@ -429,5 +429,13 @@ class Tools {
       createIFrame(url, index * 100, 1000);
     });
   }
+  /**
+   * 处理数字小于10时的格式/在小于10的数字前面拼接0
+   * @param num
+   * @returns
+   */
+  public static numFormat(num: number) {
+    return num < 10 ? `0${num}` : num.toString();
+  }
 }
 export default Tools;
