@@ -73,32 +73,33 @@ class Tools {
   }
   /**
    * 处理日期格式
-   * @param timeStamp  时间错
+   * @param timeStamp  时间戳 或者 日期字符串
    * @param format 格式
    */
-  public static dateFormat(timeStamp: number, format?: string) {
+  public static dateFormat(timeStamp: number | string, format?: string) {
+    // 格式处理
     function formatNumber(n: number | string) {
       n = n.toString();
       return n[1] ? n : '0' + n;
     }
-
+    // 更具timeState创建日期对象
     const date = new Date(timeStamp);
-    const year = formatNumber(date.getFullYear());
+    // 获取年月日、时分秒
+    const year = date.getFullYear().toString();
     const month = formatNumber(date.getMonth() + 1);
     const day = formatNumber(date.getDate());
-
     const hour = formatNumber(date.getHours());
     const minute = formatNumber(date.getMinutes());
     const second = formatNumber(date.getSeconds());
-
+    // 判断是否存在格式
     if (format) {
       return format
-        .replace('yyyy', year)
-        .replace('mm', month)
-        .replace('dd', day)
-        .replace('hh', hour)
-        .replace('mm', minute)
-        .replace('ss', second);
+        .replace(/YYYY/i, year)
+        .replace(/MM/i, month)
+        .replace(/DD/i, day)
+        .replace(/hh/i, hour)
+        .replace(/mm/i, minute)
+        .replace(/ss/i, second);
     }
     let res = '';
     res += year + '-' + month + '-' + day + ' ';
