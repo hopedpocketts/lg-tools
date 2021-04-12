@@ -341,7 +341,11 @@ class Tools {
    */
   public static exportExcel(data: Blob, fileName: string) {
     return new Promise((resolve, reject) => {
-      if (data.type === 'application/vnd.ms-excel') {
+      if (
+        ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'].indexOf(
+          data.type,
+        ) !== -1
+      ) {
         const blob = new Blob([data], { type: 'application/xlsx' });
         const objectURL = URL.createObjectURL(blob);
         let a: HTMLAnchorElement | null = document.createElement('a');
