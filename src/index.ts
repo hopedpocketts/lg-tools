@@ -73,17 +73,21 @@ class Tools {
   }
   /**
    * 处理日期格式
-   * @param timeStamp  时间戳 或者 日期字符串
+   * @param v  时间戳 / 日期字符串 / 日期对象
    * @param format 格式
    */
-  public static dateFormat(timeStamp: number | string, format?: string) {
+  public static dateFormat(v: number | string | Date, format?: string) {
     // 格式处理
     function formatNumber(n: number | string) {
       n = n.toString();
       return n[1] ? n : '0' + n;
     }
-    // 更具timeState创建日期对象
-    const date = new Date(timeStamp);
+    let date: Date;
+    if (Object.prototype.toString.call(v).slice(8, -1).toLowerCase() === 'date') {
+      date = v as Date;
+    } else {
+      date = new Date(v);
+    }
     // 获取年月日、时分秒
     const year = date.getFullYear().toString();
     const month = formatNumber(date.getMonth() + 1);
