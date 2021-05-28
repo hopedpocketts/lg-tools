@@ -124,6 +124,22 @@ class Tools {
   }
 
   /**
+   * 对象数组根据指定key去重
+   * @param arr
+   * @param key
+   * @returns
+   */
+  public static unique<T extends object>(arr: T[], key: keyof T): T[] {
+    const obj: Record<string, any> = {};
+    const res = arr.reduce((temps: T[], next: T) => {
+      const v = next[key] + '';
+      obj[v] ? '' : (obj[v] = true && temps.push(next));
+      return temps;
+    }, []);
+    return res;
+  }
+
+  /**
    * 手机号码格式
    * @param phone
    * @param format space

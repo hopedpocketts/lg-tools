@@ -1,6 +1,9 @@
 {
   "extends": ["tslint:recommended", "tslint-config-prettier"],
   "rules": {
-    "prefer-const": [true, {"destructuring":"all"}]
+    "no-unused-expression": false,
+    "prefer-const": [true, {
+      "destructuring": "all"
+    }]
   }
 }
