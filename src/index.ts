@@ -462,5 +462,25 @@ class Tools {
   public static numFormat(num: number) {
     return num < 10 ? `0${num}` : num.toString();
   }
+
+  /**
+   * 获取当前运行环境
+   * @returns
+   * - android：安卓环境
+   * - ios：iOS环境
+   * - weixin：微信环境
+   */
+  public static getEnv() {
+    const _userAgent = window.navigator.userAgent;
+    if (/Linux|Android/i.test(_userAgent)) {
+      return 'android';
+    } else if (/iPhone/i.test(_userAgent)) {
+      return 'ios';
+    } else if (/MicroMessenger/i.test(_userAgent)) {
+      return 'weixin';
+    } else {
+      return '';
+    }
+  }
 }
 export default Tools;
