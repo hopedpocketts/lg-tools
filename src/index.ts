@@ -473,12 +473,12 @@ class Tools {
    */
   public static getEnv() {
     const _userAgent = window.navigator.userAgent;
-    if (/Linux|Android/i.test(_userAgent)) {
+    if (/MicroMessenger/i.test(_userAgent)) {
+      return 'weixin';
+    } else if (/Linux|Android/i.test(_userAgent)) {
       return 'android';
     } else if (/iPhone/i.test(_userAgent)) {
       return 'ios';
-    } else if (/MicroMessenger/i.test(_userAgent)) {
-      return 'weixin';
     } else {
       return 'unknown';
     }
