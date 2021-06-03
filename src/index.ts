@@ -469,6 +469,7 @@ class Tools {
    * - android：安卓环境
    * - ios：iOS环境
    * - weixin：微信环境
+   * - unknown：未知环境
    */
   public static getEnv() {
     const _userAgent = window.navigator.userAgent;
@@ -479,7 +480,7 @@ class Tools {
     } else if (/MicroMessenger/i.test(_userAgent)) {
       return 'weixin';
     } else {
-      return '';
+      return 'unknown';
     }
   }
 }
