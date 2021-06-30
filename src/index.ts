@@ -502,7 +502,9 @@ class Tools {
     const date = curDate.getDate();
     // 日期目录
     const dateDir = `${year}${formatter(month)}${formatter(date)}`; // 如：20210630
-    const filePath = `${dirName}/${dateDir}/${Tools.randomCharacters(3, 'uppercase')}${curDate.getTime()}_${file.name}`;
+    // 获取文件后缀
+    const suffix = file.name.split('.')[1];
+    const filePath = `${dirName}/${dateDir}/${Tools.randomCharacters(3, 'uppercase')}${curDate.getTime()}.${suffix}`;
     return filePath;
   }
 }
