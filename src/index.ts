@@ -483,5 +483,27 @@ class Tools {
       return 'unknown';
     }
   }
+  /**
+   * 获取文件存储路径
+   * 一般用于规范对象存储时的文件管理规范
+   * 生成格式如下：存储目录名/日期/随机字符（3个）+时间戳_图片本身名字.后缀名
+   * 示例：admin/avatar/20210630/ULK1625036350104_logo.png
+   * @param file
+   * @param dirName
+   * @returns
+   */
+  public static getFilePath(file: File, dirName: string) {
+    // 格式化
+    const formatter = (n: number) => (n < 10 ? `0${n}` : n);
+    // 当前日期
+    const curDate = new Date();
+    const year = curDate.getFullYear();
+    const month = curDate.getMonth() + 1;
+    const date = curDate.getDate();
+    // 日期目录
+    const dateDir = `${year}${formatter(month)}${formatter(date)}`; // 如：20210630
+    const filePath = `${dirName}/${dateDir}/${Tools.randomCharacters(3, 'uppercase')}${curDate.getTime()}_${file.name}`;
+    return filePath;
+  }
 }
 export default Tools;
