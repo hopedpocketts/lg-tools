@@ -167,11 +167,9 @@ class Tools {
   public static clipboard(value: string) {
     return new Promise((resolve, reject) => {
       const input = document.createElement('input');
-      input.setAttribute('style', 'display: block; width: 1px; height: 1px;');
-      input.setAttribute('readonly', 'readonly');
       input.setAttribute('value', value);
       document.body.appendChild(input);
-      input.setSelectionRange(0, Infinity);
+
       input.select();
       const result = document.execCommand('copy');
       document.body.removeChild(input);
