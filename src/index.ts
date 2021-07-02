@@ -505,5 +505,35 @@ class Tools {
     const filePath = `${dirName}/${dateDir}/${Tools.randomCharacters(3, 'uppercase')}${curDate.getTime()}.${suffix}`;
     return filePath;
   }
+
+  /**
+   * url转base64
+   * @param url
+   * @returns
+   */
+  public static base64(url: string) {
+    return new Promise((resolve, reject) => {
+      let xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.responseType = 'blob';
+      xhr.onload = function () {
+        if (this.status === 200) {
+          let blob = this.response;
+          let fileReader = new FileReader();
+          fileReader.onloadend = function (e) {
+            const target = e.target;
+            if (target) {
+              resolve(target.result);
+            }
+          };
+          fileReader.readAsDataURL(blob);
+        }
+      };
+      xhr.onerror = function () {
+        reject();
+      };
+      xhr.send();
+    });
+  }
 }
 export default Tools;
