@@ -513,14 +513,14 @@ class Tools {
    */
   public static base64(url: string) {
     return new Promise((resolve, reject) => {
-      let xhr = new XMLHttpRequest();
+      const xhr = new XMLHttpRequest();
       xhr.open('GET', url, true);
       xhr.responseType = 'blob';
       xhr.onload = function () {
         if (this.status === 200) {
-          let blob = this.response;
-          let fileReader = new FileReader();
-          fileReader.onloadend = function (e) {
+          const blob = this.response;
+          const fileReader = new FileReader();
+          fileReader.onloadend = (e) => {
             const target = e.target;
             if (target) {
               resolve(target.result);
@@ -529,7 +529,7 @@ class Tools {
           fileReader.readAsDataURL(blob);
         }
       };
-      xhr.onerror = function () {
+      xhr.onerror = () => {
         reject();
       };
       xhr.send();
