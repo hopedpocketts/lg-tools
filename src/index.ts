@@ -71,6 +71,20 @@ class Tools {
     }
     return res;
   }
+
+  /**
+   * 将对象转为formData格式
+   * @param object
+   * @returns
+   */
+  public static convertToFormDataWith(object: Record<string, any>) {
+    const formData = new FormData();
+    for (const key of Object.keys(object)) {
+      formData.append(key, object[key]);
+    }
+    return formData;
+  }
+
   /**
    * 处理日期格式
    * @param v  时间戳 / 日期字符串 / 日期对象
@@ -378,7 +392,6 @@ class Tools {
       }
     });
   }
-
   /**
    * 获取年份集合
    * @param start 开始年/默认值：1970
