@@ -480,12 +480,15 @@ class Tools {
    * - android：安卓环境
    * - ios：iOS环境
    * - weixin：微信环境
+   * - alipay：支付宝环境
    * - unknown：未知环境
    */
   public static getEnv() {
     const _userAgent = window.navigator.userAgent;
     if (/MicroMessenger/i.test(_userAgent)) {
       return 'weixin';
+    } else if (/AlipayClient/i.test(_userAgent)) {
+      return 'alipay';
     } else if (/Linux|Android/i.test(_userAgent)) {
       return 'android';
     } else if (/iPhone/i.test(_userAgent)) {
